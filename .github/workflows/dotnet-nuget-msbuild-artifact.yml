@@ -44,8 +44,8 @@ jobs:
       run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
       
     - name: Create Publish Folder
-      working-directory: ${{env.GITHUB_WORKSPACE}}\WebApp
-      run: tree
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: mkdir ${{env.GITHUB_WORKSPACE}}\WebApp\Publish
       
     - name: MSBuild for Release - Publish
       working-directory: ${{env.GITHUB_WORKSPACE}}
