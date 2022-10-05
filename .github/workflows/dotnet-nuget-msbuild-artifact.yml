@@ -45,7 +45,7 @@ jobs:
       
     - name: Create Publish Folder
       working-directory: ${{env.GITHUB_WORKSPACE}}\WebApp
-      run: mkdir Publish
+      run: tree
       
     - name: MSBuild for Release - Publish
       working-directory: ${{env.GITHUB_WORKSPACE}}
