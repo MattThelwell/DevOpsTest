@@ -20,7 +20,7 @@ jobs:
     steps:
     # Checkout master branch
     - name: Check out main branch
-    - uses: actions/checkout@master
+      uses: actions/checkout@master
     
     # Install MSBuild to build the projecty
     - name: Setup MSBuild.exe
