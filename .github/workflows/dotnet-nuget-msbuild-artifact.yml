@@ -1,4 +1,5 @@
 name: ASP.NET CI
+# Description: Pulls main branch, restores nuget packages, builds and publishes website in release mode, creates artifact DevOpsTestBuildOutput
 
 on:
   push:
@@ -20,7 +21,7 @@ jobs:
     steps:
     # Checkout master branch
     - name: Check out main branch
-      uses: actions/checkout@master
+      uses: actions/checkout@main
     
     # Install MSBuild to build the projecty
     - name: Setup MSBuild.exe
@@ -46,23 +47,16 @@ jobs:
     - name: MSBuild for Release - Publish
       run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=D:\_build\  
       
-    # Show the build files
-    - name: Show build files (before)
-      run: ls D:\_build\_PublishedWebsites
-    
     # Show the build tree
-    - name: Show build files (before)
-      run: tree D:\_build\_PublishedWebsites
+    #- name: Show build files tree
+    #  run: tree D:\_build\_PublishedWebsites
       
-    # Show the build tree
-    - name: Show build files (before)
-      run: tree D:\_build\_PublishedWebsites\DevOpsTest
+    # Show the website publish tree
+    #- name: Show build files DevOpsTest tree
+    #  run: tree D:\_build\_PublishedWebsites\DevOpsTest
       
     # Upload the artifact
     - uses: actions/upload-artifact@v3
       with:
         name: DevOpsTestBuildOutput
         path: D:\_build\_PublishedWebsites\DevOpsTest\
-      
-      
-      
