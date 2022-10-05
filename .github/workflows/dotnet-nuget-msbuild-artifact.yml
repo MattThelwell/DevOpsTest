@@ -2,8 +2,10 @@ name: ASP.NET CI
 
 on:
   push:
+  # When beranch main is pushed too, run this action
     branches: [ main ]
   pull_request:
+  # When a pull request on main is accepted run this action
     branches: [ main ]
     
   # Allows you to run this workflow manually from the Actions tab
@@ -11,28 +13,37 @@ on:
 
 jobs:
   build:
+    # Uses latest version of windows to build the web application
     runs-on: windows-latest
 
+    # List of steps for the build job
     steps:
+    # Checkout master branch
     - uses: actions/checkout@master
-
+    
+    # Install MSBuild to build the projecty
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.1
       
+    # Install nuget to restore the nuget packages and restore and dependencies
     - name: Install Nuget
       uses: nuget/setup-nuget@v1
       
+    # Run the tree command on current directory so I can see what files are there  
     - name: DirectoryDiscovery
       run: tree
-      
+    
+    # Run the tree command on the github workspace dir so I can see whats there
     - name: DirectoryDiscovery
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: tree
       
+    # Run the tree command on the solution file path so I can see whats there
     - name: DirectoryDiscovery
       working-directory: ${{env.SOLUTION_FILE_PATH}}
       run: tree
-
+      
+    # Run the tree command on the SRC dir so I can see whats there
     - name: DirectoryDiscovery
       working-directory: src
       run: tree
