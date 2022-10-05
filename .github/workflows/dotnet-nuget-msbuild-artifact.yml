@@ -30,21 +30,15 @@ jobs:
       uses: nuget/setup-nuget@v1
       
     # Run the tree command on current directory so I can see what files are there  
-    - name: DirectoryDiscovery
-      run: tree
-    
-    # Run the tree command on the github workspace dir so I can see whats there
-    - name: DirectoryDiscovery
+    - name: Directory Tree
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: tree
       
-    # Run the tree command on the solution file path so I can see whats there
-    - name: DirectoryDiscovery
-      working-directory: ${{env.SOLUTION_FILE_PATH}}
-      run: tree
+    # Run the tree command on current directory so I can see what files are there  
+    - name: Directory Dir
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: dir
       
-    # Run the tree command on the SRC dir so I can see whats there
-    - name: DirectoryDiscovery
-      working-directory: src
-      run: tree
-
+    - name: MSBuild for Release
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
