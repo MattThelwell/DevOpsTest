@@ -53,11 +53,11 @@ jobs:
     # Show the build tree
     - name: Show build files (before)
       run: |
-        cd D:\_build\_PublishedWebsites\DevOpsTest
+        cd D:\_build\
         dir
     
     # Show the build tree
     - name: Show build files (before)
       run: |
-        cd D:\_build\_PublishedWebsites\DevOpsTest
+        cd D:\_build\
         tree
