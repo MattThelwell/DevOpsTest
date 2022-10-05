@@ -59,8 +59,8 @@ jobs:
       
     # Show the build files
     - name: Show build files (before)
-      run: ls D:\_build\
+      run: ls D:\_build\_PublishedWebsites
     
     # Show the build tree
     - name: Show build files (before)
-      run: tree D:\_build\
+      run: tree D:\_build\_PublishedWebsites
