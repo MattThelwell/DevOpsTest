@@ -34,39 +34,24 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: tree
       
-    # Run the tree command on current directory so I can see what files are there  
-    - name: Directory Dir
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dir
-      
+    # Build the application  
     - name: MSBuild for Release - Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
       
-    - name: Create Publish Folder
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: mkdir ${{env.GITHUB_WORKSPACE}}\WebApp\Publish
+    # Create a folder for it be built too
+    - name: Create Build Folder
+      run: mkdir ${{env.GITHUB_WORKSPACE}}\_build\
+    
+    # Show the build files
+    - name: Show build files (before)
+      run: ls ${{github.workspace}}\_build\
       
+    # Build the website and publish it  
     - name: MSBuild for Release - Publish
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild "WebApp\DevOpsTest.sln" /t:Publish /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:DeployOnBuild=true /p:OutDir=D:\WebApp\Publish
+      run: msbuild "WebApp\DevOpsTest.sln" -verbosity:minimal -t:rebuild -property:Configuration=Release /p:WebPublishMethod=FileSystem /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:PublishUrl="../_build"
       
-      
-    # Run the tree command on current directory so I can see what files are there  
-    - name: Directory Dir
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: |
-        cd D:\WebApp\Publish
-        tree 
-      
-    # Run the tree command on current directory so I can see what files are there  
-    - name: Directory Dir
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dir
-      
-    # Run the tree command on current directory so I can see what files are there  
-    - name: Directory Dir 2
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: |
-        cd WebApp
-        dir
+    # Show the build files
+    - name: Show build files (before)
+      run: ls ${{github.workspace}}\_build\
