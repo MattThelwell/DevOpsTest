@@ -40,16 +40,18 @@ jobs:
       
     # Create a folder for it be built too
     - name: Create Build Folder
-      run: mkdir ${{env.GITHUB_WORKSPACE}}\_build\
-    
-    # Show the build files
-    - name: Show build files (before)
-      run: ls ${{env.GITHUB_WORKSPACE}}\_build\
+      run: mkdir D:\_build\
       
     # Build the website and publish it  
     - name: MSBuild for Release - Publish
-      run: msbuild "WebApp\DevOpsTest.sln" -verbosity:minimal -t:rebuild -property:Configuration=Release /p:WebPublishMethod=FileSystem /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:PublishUrl="../_build"
+      run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=D:\_build\
       
     # Show the build files
     - name: Show build files (before)
-      run: ls ${{github.workspace}}\_build\
+      run: ls D:\_build\
+      
+    # Show the build tree
+    - name: Show build files (before)
+      run: |
+        cd D:\_build\
+        tree
