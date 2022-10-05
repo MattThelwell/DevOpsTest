@@ -21,15 +21,19 @@ jobs:
       
     - name: Install Nuget
       uses: nuget/setup-nuget@v1
-
-    #- name: Restore NuGet packages
-    #  working-directory: ${{env.GITHUB_WORKSPACE}}
-    #  run: nuget restore ${{env.SOLUTION_FILE_PATH}}
-
-    - name: MSBuild for Release
+      
+    - name: DirectoryDiscovery
+      run: tree
+      
+    - name: DirectoryDiscovery
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild "${{env.SOLUTION_FILE_PATH}}\WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
+      run: tree
+      
+    - name: DirectoryDiscovery
+      working-directory: ${{env.SOLUTION_FILE_PATH}}
+      run: tree
 
-    - name: MSBuild for Publish
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild "${{env.SOLUTION_FILE_PATH}}\WebApp\DevOpsTest.sln"  /t:Publish /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
+    - name: DirectoryDiscovery
+      working-directory: src
+      run: tree
+
