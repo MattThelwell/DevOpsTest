@@ -36,7 +36,6 @@ jobs:
       
     # Build the application  
     - name: MSBuild for Release - Build
-      working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
       
     # Create a folder for it be built too
@@ -49,7 +48,6 @@ jobs:
       
     # Build the website and publish it  
     - name: MSBuild for Release - Publish
-      working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild "WebApp\DevOpsTest.sln" -verbosity:minimal -t:rebuild -property:Configuration=Release /p:WebPublishMethod=FileSystem /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:PublishUrl="../_build"
       
     # Show the build files
