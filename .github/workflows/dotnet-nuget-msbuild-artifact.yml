@@ -39,6 +39,20 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: dir
       
-    - name: MSBuild for Release
+    - name: MSBuild for Release - Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
+      
+    - name: Create Publish Folder
+      working-directory: ${{env.GITHUB_WORKSPACE}}\WebApp
+      run: mkdir Publish
+      
+    - name: MSBuild for Release - Publish
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild "WebApp\DevOpsTest.sln" /t:Publish /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=${{env.GITHUB_WORKSPACE}}\WebApp\Publish
+      
+      
+    # Run the tree command on current directory so I can see what files are there  
+    - name: Directory Dir
+      working-directory: ${{env.GITHUB_WORKSPACE}}\WebApp\Publish
+      run: dir
