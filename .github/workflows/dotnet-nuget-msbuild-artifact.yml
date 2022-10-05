@@ -45,6 +45,17 @@ jobs:
     # Build the website and publish it  
     - name: MSBuild for Release - Publish
       run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=D:\_build\
+          
+          
+    # Run the tree command on current directory so I can see what files are there  
+    - name: Directory Tree
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: tree
+      
+    # Run the tree command on current directory so I can see what files are there  
+    - name: Directory Tree
+      working-directory: D:\
+      run: tree     
       
     # Show the build files
     - name: Show build files (before)
