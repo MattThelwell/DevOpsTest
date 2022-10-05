@@ -45,7 +45,7 @@ jobs:
     
     # Show the build files
     - name: Show build files (before)
-      run: ls ${{github.workspace}}\_build\
+      run: ls ${{env.GITHUB_WORKSPACE}}\_build\
       
     # Build the website and publish it  
     - name: MSBuild for Release - Publish
