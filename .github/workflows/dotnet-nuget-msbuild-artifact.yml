@@ -1,0 +1,32 @@
+name: ASP.NET CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.1
+      
+    - name: Install Nuget
+      uses: nuget/setup-nuget@v1
+
+    - name: Restore NuGet packages
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+
+    - name: MSBuild for Release
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild "${{env.GITHUB_WORKSPACE}}\WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
+
+    - name: MSBuild for Publish
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild "${{env.GITHUB_WORKSPACE}}\WebApp\DevOpsTest.sln"  /t:Publish /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
