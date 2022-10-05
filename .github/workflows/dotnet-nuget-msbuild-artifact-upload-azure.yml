@@ -5,8 +5,13 @@ name: ASP.NET CI/CD - Build and deploy ASP app to Azure Web App
 
 on:
   push:
-    branches:
-      - main
+  # When beranch main is pushed too, run this action
+    branches: [ main ]
+  pull_request:
+  # When a pull request on main is accepted run this action
+    branches: [ main ]
+    
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -22,8 +27,8 @@ jobs:
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.0.5
 
-      #- name: Restore NuGet packages
-        #run: nuget restore
+        #- name: Restore NuGet packages
+        #run: nuget restore "WebApp\DevOpsTest.sln"
 
       - name: Publish to folder
         run: msbuild "WebApp\DevOpsTest.sln" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
