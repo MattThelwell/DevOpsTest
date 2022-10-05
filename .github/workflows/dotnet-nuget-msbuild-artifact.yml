@@ -44,20 +44,12 @@ jobs:
       
     # Build the website and publish it  
     - name: MSBuild for Release - Publish
-      run: msbuild "WebApp\DevOpsTest.sln" /t:Publish /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=D:\_build\
+      run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=D:\_build\
       
     # Show the build files
     - name: Show build files (before)
       run: ls D:\_build\
-        
-    # Show the build ls
-    - name: Show build files (before)
-      run: |
-        cd D:\_build\
-        ls
     
     # Show the build tree
     - name: Show build files (before)
-      run: |
-        cd D:\_build\
-        tree
+      run: tree D:\_build\
