@@ -54,5 +54,12 @@ jobs:
       
     # Run the tree command on current directory so I can see what files are there  
     - name: Directory Dir
-      working-directory: ${{env.GITHUB_WORKSPACE}}\WebApp\Publish
+      working-directory: ${{env.GITHUB_WORKSPACE}}
       run: dir
+      
+    # Run the tree command on current directory so I can see what files are there  
+    - name: Directory Dir 2
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: |
+        cd WebApp
+        dir
