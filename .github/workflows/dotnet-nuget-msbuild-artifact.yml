@@ -19,6 +19,7 @@ jobs:
     # List of steps for the build job
     steps:
     # Checkout master branch
+    - name: Check out main branch
     - uses: actions/checkout@master
     
     # Install MSBuild to build the projecty
@@ -29,10 +30,9 @@ jobs:
     - name: Install Nuget
       uses: nuget/setup-nuget@v1
       
-    # Run the tree command on current directory so I can see what files are there  
-    - name: Directory Tree
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: tree
+    # Restore Nuget Packages
+    - name: Install Nuget
+      run: nuget restore "WebApp\DevOpsTest.sln"
       
     # Build the application  
     - name: MSBuild for Release - Build
@@ -42,20 +42,9 @@ jobs:
     - name: Create Build Folder
       run: mkdir D:\_build\
       
-    # Build the website and publish it  
+    # Build the website and publish it
     - name: MSBuild for Release - Publish
-      run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=D:\_build\
-          
-          
-    # Run the tree command on current directory so I can see what files are there  
-    - name: Directory Tree
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: tree
-      
-    # Run the tree command on current directory so I can see what files are there  
-    - name: Directory Tree
-      working-directory: D:\
-      run: tree     
+      run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=D:\_build\  
       
     # Show the build files
     - name: Show build files (before)
@@ -64,3 +53,7 @@ jobs:
     # Show the build tree
     - name: Show build files (before)
       run: tree D:\_build\_PublishedWebsites
+      
+    # Show the build tree
+    - name: Show build files (before)
+      run: tree D:\_build\_PublishedWebsites\DevOpsTest
