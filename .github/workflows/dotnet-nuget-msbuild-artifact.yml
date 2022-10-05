@@ -50,11 +50,11 @@ jobs:
     - name: Show build files (before)
       run: ls D:\_build\
         
-    # Show the build tree
+    # Show the build ls
     - name: Show build files (before)
       run: |
         cd D:\_build\
-        dir
+        ls
     
     # Show the build tree
     - name: Show build files (before)
