@@ -1,4 +1,4 @@
-name: ASP.NET CI
+name: ASP.NET CI - Build Web App and store artifact
 # Description: Pulls main branch, restores nuget packages, builds and publishes website in release mode, creates artifact DevOpsTestBuildOutput
 
 on:
