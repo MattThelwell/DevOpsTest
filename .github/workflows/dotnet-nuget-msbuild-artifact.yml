@@ -31,7 +31,7 @@ jobs:
       uses: nuget/setup-nuget@v1
       
     # Restore Nuget Packages
-    - name: Install Nuget
+    - name: Restore Nuget Packages
       run: nuget restore "WebApp\DevOpsTest.sln"
       
     # Build the application  
@@ -57,3 +57,12 @@ jobs:
     # Show the build tree
     - name: Show build files (before)
       run: tree D:\_build\_PublishedWebsites\DevOpsTest
+      
+    # Upload the artifact
+    - uses: actions/upload-artifact@v3
+      with:
+        name: DevOpsTestBuildOutput
+        path: D:\_build\_PublishedWebsites\DevOpsTest\
+      
+      
+      
