@@ -45,7 +45,7 @@ jobs:
           
       # Runs a set of commands using the runners shell
       - name: Create new folder with BUILD Number, BUILD DATE or GUID for build commit
-        run: Create the output folder
+        run: echo Create the output folder
           
       # Runs a set of commands using the runners shell
       - name: Extract Zip file to correct location
