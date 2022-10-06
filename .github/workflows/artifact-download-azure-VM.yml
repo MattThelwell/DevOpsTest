@@ -1,0 +1,58 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ASP.NET CD - Deploy ASP app to Azure VM
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: dotnet-nuget-msbuild-artifact-upload.yml
+          workflow_conclusion: success
+          path: D:\a\DevOpsTest\DevOpsTest
+          
+      - name: Move extracted files to root
+        run: Move-Item -Path 'D:\a\DevOpsTest\DevOpsTest\ASP-app\*' -Destination . -Force
+        
+      - name: Delete unneeded "ASP-app" folder
+        run: Remove-Item D:\a\DevOpsTest\DevOpsTest\ASP-app\ 
+        
+      # Runs a single command using the runners shell
+      - name: ZIP the folder ready to deploy to VM
+        run: echo zip folder for VM
+
+      # Runs a single command using the runners shell
+      - name: SSH/SFTP to VM using credentials
+        run: echo connect to VM
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+          
+      # Runs a set of commands using the runners shell
+      - name: Create new folder with BUILD Number, BUILD DATE or GUID for build commit
+        run: Create the output folder
+          
+      # Runs a set of commands using the runners shell
+      - name: Extract Zip file to correct location
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+          
+      # Runs a set of commands using the runners shell
+      - name: Swap folder in IIS
+        run: echo swapping folder in IIS
