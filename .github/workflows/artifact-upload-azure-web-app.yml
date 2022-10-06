@@ -25,6 +25,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: DevOpsTestBuildOutput
+          path: D:\_build\_PublishedWebsites\DevOpsTest\
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
