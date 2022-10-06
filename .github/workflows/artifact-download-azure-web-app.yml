@@ -28,35 +28,17 @@ jobs:
           workflow_conclusion: success
           path: D:\a\DevOpsTest\DevOpsTest
           
-      - name: Run Tree so I can see what files are where for the move and delete steps
-        run: tree
-        
-      - name: Run dir so I can see what files are where for the move and delete steps
-        run: dir
-          
       - name: Move extracted files to root
         run: Move-Item -Path 'D:\a\DevOpsTest\DevOpsTest\ASP-app\*' -Destination . -Force
         
       - name: Delete unneeded "ASP-app" folder
         run: Remove-Item D:\a\DevOpsTest\DevOpsTest\ASP-app\ 
-      
-      - name: Run Tree so I can see what files are where for the move and delete steps after move
-        run: tree
-        
-      - name: Run dir so I can see what files are where for the move and delete steps after move
-        run: dir
-        
-      - name: Run dir root
-        run: dir D:\       
-                
-      - name: Run tree root
-        run: tree D:\  
 
-      #- name: Deploy to Azure Web App
-      #  id: deploy-to-webapp
-      #  uses: azure/webapps-deploy@v2
-      #  with:
-      #    app-name: 'smeekdevops'
-      #    slot-name: 'Production'
-      #    publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8ED497F3E93141D097F66C6D1F19EE79 }}
-      #    package: .
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'smeekdevops'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8ED497F3E93141D097F66C6D1F19EE79 }}
+          package: .
