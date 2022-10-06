@@ -26,6 +26,7 @@ jobs:
         with:
           workflow: dotnet-nuget-msbuild-artifact-upload.yml
           workflow_conclusion: success
+          path: D:\a\DevOpsTest\DevOpsTest
           
       - name: Run Tree so I can see what files are where for the move and delete steps
         run: tree
