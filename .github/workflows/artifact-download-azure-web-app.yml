@@ -26,13 +26,12 @@ jobs:
         with:
           workflow: dotnet-nuget-msbuild-artifact-upload.yml
           workflow_conclusion: success
-          path: .
           
       - name: Move extracted files to root
-      - run: Move-Item -Path 'ASP-app\*' -Destination . -Force
+        run: Move-Item -Path 'ASP-app\*' -Destination . -Force
       
       - name: Delete unneeded "ASP-app" folder
-      - run: Remove-Item \ASP-app\         
+        run: Remove-Item \ASP-app\         
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
