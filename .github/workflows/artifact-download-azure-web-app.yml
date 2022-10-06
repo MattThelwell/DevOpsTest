@@ -5,7 +5,7 @@ name: ASP.NET CD - Deploy ASP app to Azure Web App
 
 on:
  workflow_run:
-   workflows: ["ASP.NET CI - Build Web App and store artifact"]
+   workflows: ["ASP.NET CI - Build and upload artifact"]
    types: [completed] #requested
 
  # Allows you to run this workflow manually from the Actions tab
