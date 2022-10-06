@@ -36,6 +36,9 @@ jobs:
           
       - name: Move extracted files to root
         run: Move-Item -Path 'D:\a\DevOpsTest\DevOpsTest\ASP-app\*' -Destination . -Force
+        
+      - name: Delete unneeded "ASP-app" folder
+        run: Remove-Item D:\a\DevOpsTest\DevOpsTest\ASP-app\ 
       
       - name: Run Tree so I can see what files are where for the move and delete steps after move
         run: tree
@@ -44,14 +47,10 @@ jobs:
         run: dir
         
       - name: Run dir root
-        run: dir D:\
-        
+        run: dir D:\       
                 
       - name: Run tree root
-        run: tree D:\
-      
-      #- name: Delete unneeded "ASP-app" folder
-      #  run: Remove-Item \ASP-app\         
+        run: tree D:\  
 
       #- name: Deploy to Azure Web App
       #  id: deploy-to-webapp
