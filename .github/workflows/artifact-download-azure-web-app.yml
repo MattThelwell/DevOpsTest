@@ -34,8 +34,8 @@ jobs:
       - name: Run dir so I can see what files are where for the move and delete steps
         run: dir
           
-      #- name: Move extracted files to root
-      #  run: Move-Item -Path 'D:\a\DevOpsTest\DevOpsTest\ASP-app\*' -Destination . -Force
+      - name: Move extracted files to root
+        run: Move-Item -Path 'D:\a\DevOpsTest\DevOpsTest\ASP-app\*' -Destination . -Force
       
       - name: Run Tree so I can see what files are where for the move and delete steps after move
         run: tree
