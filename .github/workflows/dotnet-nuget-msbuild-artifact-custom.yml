@@ -20,31 +20,31 @@ jobs:
     # List of steps for the build job
     steps:
     # Checkout master branch
-    - name: Check out main branch
+    - name: 📖 Check out main branch
       uses: actions/checkout@main
     
     # Install MSBuild to build the projecty
-    - name: Setup MSBuild.exe
+    - name: ⚙️ Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.1
       
     # Install nuget to restore the nuget packages and restore and dependencies
-    - name: Install Nuget
+    - name: ⚙️ Install Nuget
       uses: nuget/setup-nuget@v1
       
     # Restore Nuget Packages
-    - name: Restore Nuget Packages
+    - name: ⚙️ Restore Nuget Packages
       run: nuget restore "WebApp\DevOpsTest.sln"
       
     # Build the application  
-    - name: MSBuild for Release - Build
+    - name: 🏗️ MSBuild for Release - Build
       run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
       
     # Create a folder for it be built too
-    - name: Create Build Folder
+    - name: 📂 Create Build Folder
       run: mkdir D:\_build\
       
     # Build the website and publish it
-    - name: MSBuild for Release - Publish
+    - name: 🏗️ MSBuild for Release - Publish
       run: msbuild "WebApp\DevOpsTest.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=D:\_build\  
       
     # Show the build tree
@@ -56,7 +56,8 @@ jobs:
     #  run: tree D:\_build\_PublishedWebsites\DevOpsTest
       
     # Upload the artifact
-    - uses: actions/upload-artifact@v3
+    - name:  📚 Upload the artifact
+      uses: actions/upload-artifact@v3
       with:
         name: DevOpsTestBuildOutput
         path: D:\_build\_PublishedWebsites\DevOpsTest\
