@@ -37,6 +37,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           dry-run: true
           local-dir: /a/DevOpsTest/DevOpsTest/
-          server-dir: /site/wwwroot
+          server-dir: /site/wwwroot/
           log-level: verbose
           security: strict
