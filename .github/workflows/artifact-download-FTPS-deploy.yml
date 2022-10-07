@@ -29,7 +29,7 @@ jobs:
       - name: 📂 Delete unneeded "ASP-app" folder
         run: Remove-Item D:\a\DevOpsTest\DevOpsTest\ASP-app\ 
         
-      - name: 📂 Sync files
+      - name: 🚀 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
           server: ${{ secrets.FTP_SERVER }}
