@@ -16,17 +16,17 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Download artifact
+      - name: 📚 Download artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: dotnet-nuget-msbuild-artifact-upload.yml
           workflow_conclusion: success
           path: D:\a\DevOpsTest\DevOpsTest
           
-      - name: Move extracted files to root
+      - name: 📂 Move extracted files to root
         run: Move-Item -Path 'D:\a\DevOpsTest\DevOpsTest\ASP-app\*' -Destination . -Force
         
-      - name: Delete unneeded "ASP-app" folder
+      - name: 📂 Delete unneeded "ASP-app" folder
         run: Remove-Item D:\a\DevOpsTest\DevOpsTest\ASP-app\ 
         
       # Runs a single command using the runners shell
