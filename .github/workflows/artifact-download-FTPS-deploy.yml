@@ -32,9 +32,9 @@ jobs:
       - name: 🚀 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          server: ftps://waws-prod-cw1-005.ftp.azurewebsites.windows.net/
           username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          password: smeekdevops\$smeekdevops
           dry-run: true
           local-dir: /a/DevOpsTest/DevOpsTest/
           server-dir: /site/wwwroot/
