@@ -29,13 +29,24 @@ jobs:
       - name: 📂 Delete unneeded "ASP-app" folder
         run: Remove-Item D:\a\DevOpsTest\DevOpsTest\ASP-app\ 
         
+      #- name: 🚀 Sync files
+      #  uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      #  with:
+      #    server: ${{ secrets.FTP_SERVER }}
+      #    username: ${{ secrets.FTP_USERNAME }}
+      #    password: ${{ secrets.FTP_PASSWORD }}
+      #    dry-run: true
+      #    local-dir: /a/DevOpsTest/DevOpsTest/
+      #    server-dir: /site/wwwroot/
+      #    log-level: verbose
+          
       - name: 🚀 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          dry-run: true
-          local-dir: /a/DevOpsTest/DevOpsTest/
-          server-dir: /site/wwwroot/
-          log-level: verbose
+          ftp_host: ${{ secrets.FTP_SERVER }}
+          ftp_username: ${{ secrets.FTP_USERNAME }}
+          ftp_password: ${{ secrets.FTP_PASSWORD }}
+          local_source_dir: "/a/DevOpsTest/DevOpsTest/"
+          dist_target_dir: "/site/wwwroot/"
+          delete: "true"
+          exclude: "'^logs/' '^README.md'"
