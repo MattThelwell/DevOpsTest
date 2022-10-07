@@ -39,10 +39,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          dry-run: true
           local-dir: /a/DevOpsTest/DevOpsTest/
           server-dir: /site/wwwroot/
           log-level: verbose
           protocol: ftps
+          #dry-run: true
           #port: 990
           #timeout: 60000
