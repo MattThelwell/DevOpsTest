@@ -43,6 +43,6 @@ jobs:
           local-dir: /a/DevOpsTest/DevOpsTest/
           server-dir: /site/wwwroot/
           log-level: verbose
-          protocol: ftp
+          protocol: ftps
           #port: 990
           #timeout: 60000
