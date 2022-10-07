@@ -31,7 +31,7 @@ jobs:
         run: Remove-Item D:\a\DevOpsTest\DevOpsTest\ASP-app\ 
         
       - name: 🚀 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: waws-prod-cw1-005.ftp.azurewebsites.windows.net
           username: smeekdevops\$smeekdevops
@@ -42,4 +42,4 @@ jobs:
           log-level: verbose
           protocol: ftps
           port: 990
-          timeout: 60000
+          #timeout: 60000
