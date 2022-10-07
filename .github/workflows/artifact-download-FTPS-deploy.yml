@@ -28,19 +28,40 @@ jobs:
         
       - name: 📂 Delete unneeded "ASP-app" folder
         run: Remove-Item D:\a\DevOpsTest\DevOpsTest\ASP-app\ 
-        
-      - name: 🚀 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      
+      # Here is the deployment action
+      - name: 🚀 Sync Files
+        uses: airvzxf/ftp-deployment-action@latest
         with:
-          server: waws-prod-cw1-005.ftp.azurewebsites.windows.net
-          username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          dry-run: true
-          local-dir: /a/DevOpsTest/DevOpsTest/
-          server-dir: /site/wwwroot/
-          log-level: verbose
-          protocol: ftps
-          port: 990
+          local_dir: "./a/DevOpsTest/DevOpsTest/"
+          remote_dir: "/site/wwwroot/"
+          delete: "true"
+          max_retries: "7"
+          no_symlinks: "false"
+          ftp_ssl_allow: "true"
+          ftp_use_feat: "true"
+          ftp_nop_interval: "9"
+          net_max_retries: "0"
+          net_persist_retries: "11"
+          net_timeout: "13s"
+          dns_max_retries: "17"
+          dns_fatal_timeout: "never"
+        
+      #- name: 🚀 Sync files
+      #  uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      #  with:
+      #    server: waws-prod-cw1-005.ftp.azurewebsites.windows.net
+      #    username: ${{ secrets.FTP_USERNAME }}
+      #    password: ${{ secrets.FTP_PASSWORD }}
+      #    dry-run: true
+      #    local-dir: /a/DevOpsTest/DevOpsTest/
+      #    server-dir: /site/wwwroot/
+      #    log-level: verbose
+      #    protocol: ftps
+      #    port: 990
           
       #- name: 🚀 Sync files
       #  uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
