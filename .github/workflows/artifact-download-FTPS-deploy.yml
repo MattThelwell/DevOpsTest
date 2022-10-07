@@ -33,7 +33,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           server: waws-prod-cw1-005.ftp.azurewebsites.windows.net
-          username: ${{ secrets.FTP_USERNAME }}
+          username: smeekdevops\$smeekdevops
           password: ${{ secrets.FTP_PASSWORD }}
           dry-run: true
           local-dir: /a/DevOpsTest/DevOpsTest/
@@ -41,3 +41,4 @@ jobs:
           log-level: verbose
           protocol: ftps
           port: 990
+          timeout: 60000
