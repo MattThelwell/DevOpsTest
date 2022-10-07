@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  Build:
     # Uses latest version of windows to build the web application
     runs-on: windows-latest
 
