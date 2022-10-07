@@ -18,21 +18,22 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: 📖 Checkout Source Control
+        uses: actions/checkout@v2
 
-      - name: Setup MSBuild path
+      - name: ⚙️ Setup MSBuild path
         uses: microsoft/setup-msbuild@v1.0.2
 
-      - name: Setup NuGet
+      - name: ⚙️ Setup NuGet
         uses: NuGet/setup-nuget@v1.0.5
 
         #- name: Restore NuGet packages
         #run: nuget restore "WebApp\DevOpsTest.sln"
 
-      - name: Publish to folder
+      - name: 📂 Publish to folder
         run: msbuild "WebApp\DevOpsTest.sln" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
 
-      - name: Upload artifact for deployment job
+      - name: 📚 Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: ASP-app
