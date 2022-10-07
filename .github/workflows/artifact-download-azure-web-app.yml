@@ -21,20 +21,20 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Download artifact
+      - name: 📚 Download artifact
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: dotnet-nuget-msbuild-artifact-upload.yml
           workflow_conclusion: success
           path: D:\a\DevOpsTest\DevOpsTest
           
-      - name: Move extracted files to root
+      - name: 📂 Move extracted files to root
         run: Move-Item -Path 'D:\a\DevOpsTest\DevOpsTest\ASP-app\*' -Destination . -Force
         
-      - name: Delete unneeded "ASP-app" folder
+      - name: 📂 Delete unneeded "ASP-app" folder
         run: Remove-Item D:\a\DevOpsTest\DevOpsTest\ASP-app\ 
 
-      - name: Deploy to Azure Web App
+      - name: 🚀 Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
