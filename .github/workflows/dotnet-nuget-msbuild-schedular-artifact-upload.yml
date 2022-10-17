@@ -1,6 +1,5 @@
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: ASP.NET CI - Build and upload schedular artifact
+name: ASP.NET CI - Build Web App and store artifact
+# Description: Pulls main branch, restores nuget packages, builds and publishes website in release mode, creates artifact ASP-app
 
 on:
   push:
@@ -15,26 +14,50 @@ on:
 
 jobs:
   Build:
+    # Uses latest version of windows to build the web application
     runs-on: windows-latest
 
+    # List of steps for the build job
     steps:
-      - name: 📖 Checkout Source Control
-        uses: actions/checkout@v2
-
-      - name: ⚙️ Setup MSBuild path
-        uses: microsoft/setup-msbuild@v1.0.2
-
-      - name: ⚙️ Setup NuGet
-        uses: NuGet/setup-nuget@v1.0.5
-
-      - name: ⚙️ Restore NuGet packages
-        run: nuget restore "Schedulars\DevOpsTest.Schedular.sln"
-
-      - name: 📂 Publish to folder
-        run: msbuild "Schedulars\DevOpsTest.Schedular.sln" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
-
-      - name: 📚 Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: Schedular-app
-          path: '/published/**'
+    # Checkout master branch
+    - name: 📖 Check out main branch
+      uses: actions/checkout@main
+    
+    # Install MSBuild to build the projecty
+    - name: ⚙️ Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.1
+      
+    # Install nuget to restore the nuget packages and restore and dependencies
+    - name: ⚙️ Install Nuget
+      uses: nuget/setup-nuget@v1
+      
+    # Restore Nuget Packages
+    - name: ⚙️ Restore Nuget Packages
+      run: nuget restore "Schedulars\DevOpsTest.Schedular.sln"
+      
+    # Build the application  
+    - name: 🏗️ MSBuild for Release - Build
+      run: msbuild "Schedulars\DevOpsTest.Schedular.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false
+      
+    # Create a folder for it be built too
+    - name: 📂 Create Build Folder
+      run: mkdir D:\_build\
+      
+    # Build the website and publish it
+    - name: 🏗️ MSBuild for Release - Publish
+      run: msbuild "Schedulars\DevOpsTest.Schedular.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=D:\_build\  
+      
+    # Show the build tree
+    - name: Show build files tree
+      run: tree D:\_build\_PublishedWebsites
+      
+    # Show the website publish tree
+    - name: Show build files DevOpsTest tree
+      run: tree D:\_build\_PublishedWebsites\DevOpsTest
+      
+    # Upload the artifact
+    #- name:  📚 Upload the artifact
+    #  uses: actions/upload-artifact@v3
+    #  with:
+    #    name: ASP-app
+    #    path: D:\_build\_PublishedWebsites\DevOpsTest\
