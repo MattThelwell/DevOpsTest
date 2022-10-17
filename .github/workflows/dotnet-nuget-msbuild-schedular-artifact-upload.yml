@@ -1,0 +1,40 @@
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: ASP.NET CI - Build and upload artifact
+
+on:
+  push:
+  # When beranch main is pushed too, run this action
+    branches: [ main ]
+  pull_request:
+  # When a pull request on main is accepted run this action
+    branches: [ main ]
+    
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  Build:
+    runs-on: windows-latest
+
+    steps:
+      - name: 📖 Checkout Source Control
+        uses: actions/checkout@v2
+
+      - name: ⚙️ Setup MSBuild path
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: ⚙️ Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+
+        #- name: ⚙️ Restore NuGet packages
+        #run: nuget restore "\WebApp\DevOpsTest.Schedular\DevOpsTest.Schedular.csproj"
+
+      - name: 📂 Publish to folder
+        run: msbuild "\WebApp\DevOpsTest.Schedular\DevOpsTest.Schedular.csproj" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+
+      - name: 📚 Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: ASP-app
+          path: '/published/**'
