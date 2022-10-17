@@ -36,5 +36,5 @@ jobs:
       - name: 📚 Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: ASP-app
+          name: Schedular-app
           path: '/published/**'
