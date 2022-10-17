@@ -28,10 +28,10 @@ jobs:
         uses: NuGet/setup-nuget@v1.0.5
 
         #- name: ⚙️ Restore NuGet packages
-        #run: nuget restore "\WebApp\DevOpsTest.Schedular\DevOpsTest.Schedular.csproj"
+        #run: nuget restore "\WebApp\DDevOpsTest.Schedular.sln"
 
       - name: 📂 Publish to folder
-        run: msbuild "\WebApp\DevOpsTest.Schedular\DevOpsTest.Schedular.csproj" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+        run: msbuild "\WebApp\DDevOpsTest.Schedular.sln" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
 
       - name: 📚 Upload artifact for deployment job
         uses: actions/upload-artifact@v2
