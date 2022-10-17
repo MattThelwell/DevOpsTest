@@ -7,6 +7,8 @@ This is a repo for testing out the various features of Github Actions, aiming to
 
 ![build workflow](https://github.com/MattThelwell/DevOpsTest/actions/workflows/dotnet-nuget-msbuild-artifact-upload.yml/badge.svg)
 
+[![ASP.NET CI - Build Schedular and Store Artifact](https://github.com/MattThelwell/DevOpsTest/actions/workflows/dotnet-nuget-msbuild-schedular-artifact-upload.yml/badge.svg)](https://github.com/MattThelwell/DevOpsTest/actions/workflows/dotnet-nuget-msbuild-schedular-artifact-upload.yml)
+
 ![deploy web app workflow](https://github.com/MattThelwell/DevOpsTest/actions/workflows/artifact-download-azure-web-app.yml/badge.svg)
 
 ![deploy FTPS workflow](https://github.com/MattThelwell/DevOpsTest/actions/workflows/artifact-download-FTPS-deploy.yml/badge.svg)
