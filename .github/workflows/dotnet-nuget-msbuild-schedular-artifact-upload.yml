@@ -48,16 +48,16 @@ jobs:
       run: msbuild "Schedulars\DevOpsTest.Schedular.sln" /t:Rebuild /v:diag /p:Configuration=Release /p:PrecompileBeforePublish=true /p:EnableUpdateable=false /p:OutDir=D:\_build\  
       
     # Show the build tree
-    - name: Show build files tree
-      run: tree D:\_build\
+    #- name: Show build files tree
+    #  run: tree D:\_build\
       
     # Show the website publish tree
     #- name: Show build files DevOpsTest tree
     #  run: tree D:\_build\
       
     # Upload the artifact
-    #- name:  📚 Upload the artifact
-    #  uses: actions/upload-artifact@v3
-    #  with:
-    #    name: ASP-app
-    #    path: D:\_build\_PublishedWebsites\DevOpsTest\
+    - name:  📚 Upload the artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ASP-app
+        path: D:\_build\
