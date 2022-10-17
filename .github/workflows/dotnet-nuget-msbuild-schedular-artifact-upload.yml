@@ -1,6 +1,6 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: ASP.NET CI - Build and upload artifact
+name: ASP.NET CI - Build and upload schedular artifact
 
 on:
   push:
