@@ -1,0 +1,7 @@
+C:\Projects\DevOpsTest\WebApp\DevOpsTest.Schedular\bin\Debug\DevOpsTest.Schedular.exe.config
+C:\Projects\DevOpsTest\WebApp\DevOpsTest.Schedular\bin\Debug\DevOpsTest.Schedular.exe
+C:\Projects\DevOpsTest\WebApp\DevOpsTest.Schedular\bin\Debug\DevOpsTest.Schedular.pdb
+C:\Projects\DevOpsTest\WebApp\DevOpsTest.Schedular\obj\Debug\DevOpsTest.Schedular.csproj.AssemblyReference.cache
+C:\Projects\DevOpsTest\WebApp\DevOpsTest.Schedular\obj\Debug\DevOpsTest.Schedular.csproj.CoreCompileInputs.cache
+C:\Projects\DevOpsTest\WebApp\DevOpsTest.Schedular\obj\Debug\DevOpsTest.Schedular.exe
+C:\Projects\DevOpsTest\WebApp\DevOpsTest.Schedular\obj\Debug\DevOpsTest.Schedular.pdb
