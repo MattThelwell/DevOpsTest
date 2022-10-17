@@ -49,11 +49,11 @@ jobs:
       
     # Show the build tree
     - name: Show build files tree
-      run: tree D:\_build\_PublishedWebsites
+      run: tree D:\_build\
       
     # Show the website publish tree
-    - name: Show build files DevOpsTest tree
-      run: tree D:\_build\_PublishedWebsites\DevOpsTest
+    #- name: Show build files DevOpsTest tree
+    #  run: tree D:\_build\
       
     # Upload the artifact
     #- name:  📚 Upload the artifact
