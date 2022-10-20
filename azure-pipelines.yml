@@ -13,6 +13,8 @@ variables:
   web-app-solution: 'WebApp/DevOpsTest.sln'
   schedular-app-solution: 'Schedulars\DevOpsTest.Schedular.sln'
   database-app-solution: 'WebApp/DevOpsTest.sln'
+  web-app-build-folder: '\a\1\s\WebApp\DevOpsTest\obj\Release\Package\PackageTmp\'
+  schedular-app-build-folder: '\a\1\s\Schedulars\DevOpsTest.Schedular\obj\Release\Package\PackageTmp\'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -36,13 +38,9 @@ steps:
     configuration: '$(buildConfiguration)'
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)$(web-app-build-folder)'
     ArtifactName: 'Evolve4-WebApp'
     publishLocation: 'Container'
-- task: DeleteFiles@1
-  inputs:
-    SourceFolder: '$(Build.ArtifactStagingDirectory)'
-    Contents: '**/*'
 
 - task: VSBuild@1
   inputs:
@@ -51,12 +49,9 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: CopyFiles@2
-  inputs:
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)$(schedular-app-build-folder)'
     ArtifactName: 'Evolve4-Schedular-App'
     publishLocation: 'Container'
