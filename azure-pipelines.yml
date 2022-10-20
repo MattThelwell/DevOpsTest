@@ -13,8 +13,8 @@ variables:
   web-app-solution: 'WebApp/DevOpsTest.sln'
   schedular-app-solution: 'Schedulars\DevOpsTest.Schedular.sln'
   database-app-solution: 'WebApp/DevOpsTest.sln'
-  web-app-build-folder: '\a\1\s\WebApp\DevOpsTest\obj\Release\Package\PackageTmp\'
-  schedular-app-build-folder: '\a\1\s\Schedulars\DevOpsTest.Schedular\obj\Release\Package\PackageTmp\'
+  web-app-build-folder: 'D:\a\1\s\WebApp\DevOpsTest\obj\Release\Package\PackageTmp\'
+  schedular-app-build-folder: 'D:\a\1\s\Schedulars\DevOpsTest.Schedular\obj\Release\Package\PackageTmp\'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -38,7 +38,7 @@ steps:
     configuration: '$(buildConfiguration)'
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)$(web-app-build-folder)'
+    PathtoPublish: '$(web-app-build-folder)'
     ArtifactName: 'Evolve4-WebApp'
     publishLocation: 'Container'
 
@@ -52,6 +52,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)$(schedular-app-build-folder)'
+    PathtoPublish: '$(schedular-app-build-folder)'
     ArtifactName: 'Evolve4-Schedular-App'
     publishLocation: 'Container'
