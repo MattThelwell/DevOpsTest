@@ -10,7 +10,9 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'WebApp/DevOpsTest.sln'
+  web-app-solution: 'WebApp/DevOpsTest.sln'
+  schedular-app-solution: 'Schedulars\DevOpsTest.Schedular.sln'
+  database-app-solution: 'WebApp/DevOpsTest.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -19,11 +21,11 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
+    restoreSolution: '$(web-app-solution)'
 
 - task: VSBuild@1
   inputs:
-    solution: '$(solution)'
+    solution: '$(web-app-solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
@@ -32,3 +34,25 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'Evolve4-WebApp'
+    publishLocation: 'Container'
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: '$(Build.ArtifactStagingDirectory)'
+    Contents: '*.*'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(schedular-app-solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'Evolve4-Schedular-App'
+    publishLocation: 'Container'
