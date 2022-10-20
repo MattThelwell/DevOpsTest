@@ -14,7 +14,7 @@ variables:
   schedular-app-solution: 'Schedulars\DevOpsTest.Schedular.sln'
   database-app-solution: 'WebApp/DevOpsTest.sln'
   web-app-build-folder: 'D:\a\1\s\WebApp\DevOpsTest\obj\Release\Package\PackageTmp\'
-  schedular-app-build-folder: 'D:\a\1\s\Schedulars\DevOpsTest.Schedular\obj\Release\Package\PackageTmp\'
+  schedular-app-build-folder: 'D:\a\1\s\Schedulars\DevOpsTest.Schedular\bin\Release\'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
